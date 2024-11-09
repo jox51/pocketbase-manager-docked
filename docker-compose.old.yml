@@ -1,0 +1,38 @@
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - ./storage:/var/www/html/storage
+            - ./bootstrap/cache:/var/www/html/bootstrap/cache
+            - build_volume:/var/www/html/public/build
+        environment:
+            - APP_ENV=production
+            - APP_DEBUG=false
+            - APP_KEY=${APP_KEY}
+        networks:
+            - app-network
+        ports:
+            - "8000:8000"
+            - "5173:5173"
+
+    nginx:
+        build:
+            context: .
+            dockerfile: Dockerfile.nginx
+        ports:
+            - "80:80"
+        depends_on:
+            - app
+        networks:
+            - app-network
+        volumes:
+            - build_volume:/var/www/html/public/build
+
+networks:
+    app-network:
+        driver: bridge
+
+volumes:
+    build_volume:

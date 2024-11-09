@@ -26,7 +26,7 @@ class PocketbaseTestController extends Controller
         $this->testRecordCount = (int)env('SPEED_TEST_RECORDS', 50);
     }
 
-    public function runSpeedTest(Request $request)
+    public function runSpeedTest()
     {
         try {
             // Check password length before proceeding
@@ -42,7 +42,9 @@ class PocketbaseTestController extends Controller
             $instance = $this->createTestInstance();
              
             // Step 2: Start instance
-            $startSuccess = $this->startTestInstance($instance);
+           $this->startTestInstance($instance);
+           $startSuccess = $this->instanceService->checkInstancesStatus();
+            sleep(3);
             Log::info('Instance started', ['instance' => $instance]);
             Log::info('Start success', ['startSuccess' => $startSuccess]);
 
@@ -52,7 +54,9 @@ class PocketbaseTestController extends Controller
 
 
 
-            $this->baseUrl = env('POCKETBASE_BASE_URL') . "/{$instance->name}";
+            // $this->baseUrl = env('POCKETBASE_BASE_URL') . "/{$instance->name}";
+
+            $this->baseUrl = "pb-manager-caddy-1" . "/{$instance->name}";
 
 
             // Step 3: Create admin user
