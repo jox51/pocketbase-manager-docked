@@ -28,8 +28,8 @@ services:
             - NET_ADMIN
         ports:
             - "8010:80"
-            - "443:443"
-            - "443:443/udp"
+            - "4433:443"
+            - "4434:443/udp"
         volumes:
             - ./scripts/pb-manager-scripts/caddy/Caddyfile.conf:/etc/caddy/Caddyfile
             - caddy_data:/data
