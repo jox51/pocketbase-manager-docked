@@ -27,7 +27,7 @@ services:
         cap_add:
             - NET_ADMIN
         ports:
-            - "8080:80"
+            - "8010:80"
             - "443:443"
             - "443:443/udp"
         volumes:
