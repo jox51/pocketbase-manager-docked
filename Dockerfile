@@ -24,12 +24,12 @@ WORKDIR /var/www/html
 
 
 # Copy composer files first
-COPY composer.json composer.lock ./
-RUN composer install --no-scripts
+# COPY composer.json composer.lock ./
+# RUN composer install --no-scripts
 
 # Copy package.json files
-COPY package.json package-lock.json ./
-RUN npm install
+# COPY package.json package-lock.json ./
+# RUN npm install
 
 # Copy the rest of the application
 COPY . .
@@ -43,8 +43,8 @@ RUN composer dump-autoload
 
 
 # Install dependencies
-# RUN composer install
-# RUN npm install
+RUN composer install
+RUN npm install
  # using npm run dev as npm run build was failing. Will debug later.
 # RUN npm run dev
 COPY startup.sh /usr/local/bin/startup.sh
