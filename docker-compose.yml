@@ -1,47 +1,46 @@
-
 services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
-      - "5173:5173"
-    volumes:
-      - .:/var/www/html
-      - /var/www/html/vendor
-      - /var/www/html/node_modules
-      - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - APP_ENV=local
-      - VITE_APP_URL=http://localhost:8000
-      - LARAVEL_SERVER=true
-    privileged: true
-    networks:
-      - default
-      - pbnet
+    app:
+        image: jox51/pocketbase-manager-docked:latest
+        # build:
+        #   context: .
+        #   dockerfile: Dockerfile
+        ports:
+            - "8000:8000"
+            - "5173:5173"
+        volumes:
+            - .:/var/www/html
+            - /var/www/html/vendor
+            - /var/www/html/node_modules
+            - /var/run/docker.sock:/var/run/docker.sock
+        environment:
+            - APP_ENV=local
+            - VITE_APP_URL=http://localhost:8000
+            - LARAVEL_SERVER=true
+        privileged: true
+        networks:
+            - default
+            - pbnet
 
-  caddy:
-    image: caddy:latest
-    restart: always
-    cap_add:
-      - NET_ADMIN
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
-    volumes:
-      - ./scripts/pb-manager-scripts/caddy/Caddyfile.conf:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
-    networks:
-      - pbnet
+    caddy:
+        image: caddy:latest
+        restart: always
+        cap_add:
+            - NET_ADMIN
+        ports:
+            - "80:80"
+            - "443:443"
+            - "443:443/udp"
+        volumes:
+            - ./scripts/pb-manager-scripts/caddy/Caddyfile.conf:/etc/caddy/Caddyfile
+            - caddy_data:/data
+            - caddy_config:/config
+        networks:
+            - pbnet
 volumes:
-  caddy_data:
-  caddy_config:
+    caddy_data:
+    caddy_config:
 
 networks:
-  pbnet:
-    name: pb-manager_pbnet
-    driver: bridge
-
+    pbnet:
+        name: pb-manager_pbnet
+        driver: bridge
