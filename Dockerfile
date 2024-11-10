@@ -35,7 +35,7 @@ WORKDIR /var/www/html
 COPY . .
 
 # Run composer scripts now that all files are present
-RUN composer dump-autoload
+# RUN composer dump-autoload --no-scripts
 
 # Copy the entrypoint script
 # COPY entrypoint.sh /usr/local/bin/entrypoint.sh
@@ -43,7 +43,7 @@ RUN composer dump-autoload
 
 
 # Install dependencies
-RUN composer install
+RUN composer install --no-scripts
 RUN npm install
  # using npm run dev as npm run build was failing. Will debug later.
 # RUN npm run dev
