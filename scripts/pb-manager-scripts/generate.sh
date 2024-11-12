@@ -105,5 +105,6 @@ caddy_file+="  route / {
 # Write the generated content to the respective files
 echo "$compose_file" > ../../docker-compose.yml
 echo "$caddy_file" > ./caddy/Caddyfile.conf
+echo "$caddy_file" > ./caddy/Caddyfile
 
 echo "docker-compose.yml and Caddyfile have been generated."

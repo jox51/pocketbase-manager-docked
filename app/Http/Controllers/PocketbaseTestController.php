@@ -56,7 +56,7 @@ class PocketbaseTestController extends Controller
 
             // $this->baseUrl = env('POCKETBASE_BASE_URL') . "/{$instance->name}";
 
-            $this->baseUrl = "pb-manager-caddy-1" . "/{$instance->name}";
+            $this->baseUrl = env('CADDY_BASE_URL') . "/{$instance->name}";
 
 
             // Step 3: Create admin user

@@ -1,5 +1,5 @@
 # FROM php:8.2-fpm-alpine
-FROM --platform=linux/amd64 php:8.2-fpm-alpine
+FROM --platform=linux/am64 php:8.2-fpm-alpine
 
 # Install system dependencies
 RUN apk add --no-cache \
